@@ -49,7 +49,7 @@ const Configuration = ({
           <Size />
           <Players />
           <FormControl>
-            <Button>Submit</Button>
+            <Button>Start</Button>
           </FormControl>
         </Form>
       </Layout>

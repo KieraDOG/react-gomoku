@@ -3,9 +3,10 @@ import { assocPath } from 'ramda';
 import { GAME_STATUS, BOARD_INITIAL_SIZE, COLOR } from '../../constants';
 
 export const gameSlice = createSlice({
-  name: 'board',
+  name: 'game',
   initialState: {
     status: GAME_STATUS.PREPARE,
+    currentPlayer: null,
     configuration: {
       size: {
         xs: BOARD_INITIAL_SIZE.xs,
@@ -25,6 +26,9 @@ export const gameSlice = createSlice({
   reducers: {
     run: (state, action) => {
       state.status = action.payload;
+    },
+    setCurrentPlayer: (state, action) => {
+      state.currentPlayer = action.payload;
     },
     handleConfigurationChange: (state, action) => {
       const { path, value } = action.payload;

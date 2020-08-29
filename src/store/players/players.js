@@ -16,8 +16,8 @@ export const playersSlice = createSlice({
       state.push({
         color: action.payload.color,
         name: action.payload.name,
-      })
-    }
+      });
+    },
   },
 });
 

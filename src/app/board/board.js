@@ -2,7 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { connect } from 'react-redux';
 import React from 'react';
 import styled from 'styled-components';
-import Column from './components/Column';
+import Cell from './components/Cell';
 import Row from './components/Row';
 import { CELL_SIZE } from '../../constants';
 
@@ -25,8 +25,10 @@ const Board = ({
     {rows.map((y) => (
       <Row key={y}>
         {columns.map((x) => (
-          <Column 
+          <Cell 
             key={x} 
+            x={x}
+            y={y}
             firstRow={y === 0}
             firstColumn={x === 0}
             lastRow={y === rows.length - 1}
