@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
 import { findIndex } from 'ramda';
@@ -5,17 +6,33 @@ import { CELL_SIZE } from '../../../../constants';
 import { createSelector } from '@reduxjs/toolkit';
 import { place } from '../../../../store/pieces/pieces';
 
-const Column = styled.button`
+const Cursor = styled.div`
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: red;
+  display: none;
+`;
+
+const Button = styled.button`
   border: 0;
   outline: 0;
   background: transparent;
   margin: 0;
   padding: 0;
   cursor: pointer;
-  
   height: calc(1px * ${CELL_SIZE});
   width: calc(1px * ${CELL_SIZE});
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    ${Cursor} {
+      display: block;
+    }
+  }
 
   &::after {
     content: '';
@@ -73,6 +90,12 @@ const Column = styled.button`
   }
 `;
 
+const Cell = (props) => (
+  <Button {...props}>
+    <Cursor />
+  </Button>
+)
+
 const getCurrentRoundPlayer = ({
   pieces,
   players,
@@ -122,6 +145,6 @@ const mergeProps = (state, dispatch, props) => ({
   },
 });
 
-const ConnectedColumn = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Column);
+const ConnectedCell = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Cell);
 
-export default ConnectedColumn;
+export default ConnectedCell;

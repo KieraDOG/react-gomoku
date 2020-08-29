@@ -12,6 +12,7 @@ const Layout = styled.div`
   width: calc(1px * ${(props) => CELL_SIZE * props.columns.length});
   height: calc(1px * ${(props) => CELL_SIZE * props.rows.length});
   background: #F9CC9D;
+  border-radius: 4px;
 `;
 
 const Board = ({
