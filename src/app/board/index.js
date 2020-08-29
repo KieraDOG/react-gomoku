@@ -1,2 +1,1 @@
-export { default } from './board';
-export * from './board';
+export { default } from './Board';

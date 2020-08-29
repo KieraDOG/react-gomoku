@@ -1,6 +1,7 @@
 import React from 'react';
-import Board from './components/Board';
 import styled from 'styled-components';
+import Configuration from './app/Configuration';
+import Board from './app/Board';
 
 const Game = styled.div`
   margin: 200px auto;
@@ -13,6 +14,7 @@ function App() {
   return (
     <Game>
       <Board />
+      <Configuration />
     </Game>
   );
 }
