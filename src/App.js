@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Configuration from './app/Configuration';
 import Board from './app/Board';
+import Players from './app/Players';
 import Pieces from './app/Pieces';
 
 const Game = styled.div`
@@ -17,6 +18,7 @@ function App() {
       <Game>
         <Board />
         <Pieces />
+        <Players />
       </Game>
       <Configuration />
     </React.Fragment>

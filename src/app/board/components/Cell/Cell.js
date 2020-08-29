@@ -1,10 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { connect } from 'react-redux';
-import { findIndex } from 'ramda';
 import { CELL_SIZE } from '../../../../constants';
 import { createSelector } from '@reduxjs/toolkit';
-import { place } from '../../../../store/pieces/pieces';
+import { place } from '../../../../store/pieces';
+import getCurrentRoundPlayer from '../../../../utils/getCurrentRoundPlayer';
 
 const Cursor = styled.div`
   height: 8px;
@@ -94,21 +94,7 @@ const Cell = (props) => (
   <Button {...props}>
     <Cursor />
   </Button>
-)
-
-const getCurrentRoundPlayer = ({
-  pieces,
-  players,
-}) => {
-  const piece = pieces[pieces.length - 1];
-
-  if (!piece) {
-    return players[0];
-  }
-
-  const index = findIndex((p) => p.color === piece.color)(players);
-  return players[(index + 1) % players.length];
-}
+);
 
 const mapStateToProps = createSelector(
   ({ pieces, players }, { x, y }) => ({
@@ -125,8 +111,8 @@ const mapStateToProps = createSelector(
       disabled,
       pieces,
       players,
-    }
-  }
+    };
+  },
 );
 
 const mapDispatchToProps = (dispatch, { x, y }) => ({
