@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import board from './board';
+import pieces from './pieces';
+import players from './players';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    board,
+    pieces,
+    players,
   },
 });
