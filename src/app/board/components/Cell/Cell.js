@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { CELL_SIZE } from '../../../../constants';
 import { createSelector } from '@reduxjs/toolkit';
 import { place } from '../../../../store/pieces';
-import getCurrentRoundPlayer from '../../../../utils/getCurrentRoundPlayer';
+import getCurrentRoundPlayer from '../../../../selectors/getCurrentRoundPlayer';
 
 const Cursor = styled.div`
   height: 8px;
@@ -102,7 +102,8 @@ const mapStateToProps = createSelector(
     position: { x, y },
     players,
   }),
-  ({ pieces, position, players }) => {
+  getCurrentRoundPlayer,
+  ({ pieces, position, players }, player) => {
     const disabled = pieces
       .map((p) => `${p.x},${p.y}`)
       .includes(`${position.x},${position.y}`);
@@ -111,6 +112,7 @@ const mapStateToProps = createSelector(
       disabled,
       pieces,
       players,
+      player,
     };
   },
 );
@@ -123,9 +125,9 @@ const mergeProps = (state, dispatch, props) => ({
   ...props,
   disabled: state.disabled,
   onClick: (event) => {
-    event.preventDefault();
+    const { player } = state;
 
-    const player = getCurrentRoundPlayer(state);
+    event.preventDefault();
 
     dispatch.handlePlace(player);
   },

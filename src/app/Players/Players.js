@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 import styled, { css } from 'styled-components';
 import Piece from '../../components/Piece';
-import getCurrentRoundPlayer from '../../utils/getCurrentRoundPlayer';
+import getCurrentRoundPlayer from '../../selectors/getCurrentRoundPlayer';
 
 const Layout = styled.div`
   display: flex;
@@ -34,14 +35,11 @@ const Players = ({
   </Layout>
 );
 
-const mapStateToProps = ({ players, pieces }) => {
-  const currentRoundPlayer = getCurrentRoundPlayer({ players, pieces });
-
-  return {
-    players,
-    currentRoundPlayer,
-  };
-};
+const mapStateToProps = createSelector(
+  ({ players, pieces }) => ({ players, pieces }),
+  getCurrentRoundPlayer,
+  ({ players }, currentRoundPlayer) => ({ players, currentRoundPlayer }),
+);
 
 const ConnectedPlayers = connect(mapStateToProps)(Players);
 
