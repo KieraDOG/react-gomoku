@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BOARD_INITIAL_SIZE } from '../../constants';
+import { BOARD_INITIAL_SIZE, GAME_STATUS } from '../../constants';
 
 export const boardSlice = createSlice({
   name: 'board',
   initialState: {
     xs: BOARD_INITIAL_SIZE.xs,
     ys: BOARD_INITIAL_SIZE.ys,
+    wins: {},
   },
   reducers: {
     setSize: (state, action) => {

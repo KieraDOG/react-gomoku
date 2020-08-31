@@ -36,7 +36,7 @@ const Players = ({
 );
 
 const mapStateToProps = createSelector(
-  ({ players, pieces }) => ({ players, pieces }),
+  ({ players }) => ({ players }),
   getCurrentRoundPlayer,
   ({ players }, currentRoundPlayer) => ({ players, currentRoundPlayer }),
 );

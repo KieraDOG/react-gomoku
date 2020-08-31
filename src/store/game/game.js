@@ -14,11 +14,11 @@ export const gameSlice = createSlice({
       },
       players: [{
         label: 'Player One',
-        name: '',
+        name: 'Alice',
         color: COLOR.BLACK,
       }, {
         label: 'Player Two',
-        name: '',
+        name: 'Bob',
         color: COLOR.WHITE,
       }],
     },

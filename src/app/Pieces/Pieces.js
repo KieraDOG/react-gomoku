@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import Piece from '../../components/Piece';
 import { CELL_SIZE } from '../../constants';
 
-// const Layout = styled.div`
-//   position: relative;
-// `;
-
 const getX = (props) => (CELL_SIZE / 2) * (props.x * 2 + 1);
 const getY = (props) => (CELL_SIZE / 2) * (props.y * 2 + 1);
 const Place = styled.div`
