@@ -1,10 +1,12 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { connect } from 'react-redux';
-import { CELL_SIZE } from '../../../../constants';
 import { createSelector } from '@reduxjs/toolkit';
-import { place } from '../../../../store/pieces';
+import { pathOr } from 'ramda';
+import React from 'react';
+import { connect } from 'react-redux';
+import styled, { css } from 'styled-components';
+import { CELL_SIZE } from '../../../../constants';
 import getCurrentRoundPlayer from '../../../../selectors/getCurrentRoundPlayer';
+import { place } from '../../../../store/pieces';
+import { win } from '../../../../store/players';
 
 const Cursor = styled.div`
   height: 8px;
@@ -96,40 +98,45 @@ const Cell = (props) => (
   </Button>
 );
 
-const mapStateToProps = createSelector(
-  ({ pieces, players }, { x, y }) => ({
-    pieces,
-    position: { x, y },
-    players,
-  }),
-  getCurrentRoundPlayer,
-  ({ pieces, position, players }, player) => {
-    const disabled = pieces
-      .map((p) => `${p.x},${p.y}`)
-      .includes(`${position.x},${position.y}`);
+const getDisabled = createSelector(
+  ({ pieces }, { x, y }) => ({ pieces, x, y }),
+  ({ pieces, x, y }) => pieces
+    .map((p) => `${p.x},${p.y}`)
+    .includes(`${x},${y}`),
+);
 
+const mapStateToProps = createSelector(
+  ({ board }) => ({ board }),
+  getCurrentRoundPlayer,
+  getDisabled,
+  ({ board }, currentRoundPlayer, disabled) => {
     return {
+      board,
+      currentRoundPlayer,
       disabled,
-      pieces,
-      players,
-      player,
     };
   },
 );
 
-const mapDispatchToProps = (dispatch, { x, y }) => ({
-  handlePlace: (player) => dispatch(place({ player, x, y })),
+const mapDispatchToProps = (dispatch) => ({
+  handlePlace: (color, x, y) => dispatch(place({ color, x, y })),
+  handleWin: (player, wins) => dispatch(win({ player, wins }))
 });
 
 const mergeProps = (state, dispatch, props) => ({
   ...props,
   disabled: state.disabled,
   onClick: (event) => {
-    const { player } = state;
+    const { currentRoundPlayer, board } = state;
+    const { x, y } = props;
 
     event.preventDefault();
 
-    dispatch.handlePlace(player);
+    const winMethods = pathOr({}, [x, y], board.wins);
+    const wins = Object.keys(winMethods);
+
+    dispatch.handlePlace(currentRoundPlayer.color, x, y);
+    dispatch.handleWin(currentRoundPlayer, wins);
   },
 });
 

@@ -20,17 +20,39 @@ const Player = styled.div`
   `}
 `;
 
+const Win = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255,0.8);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Players = ({
   players,
   currentRoundPlayer,
 }) => (
   <Layout>
     {players.map((p) => (
-      <Player disabled={currentRoundPlayer !== p} key={p.color}>
-        <Piece color={p.color} />
-        &nbsp;
-        {p.name}
-      </Player>
+      <React.Fragment key={p.color}>
+        {p.win && (
+          <Win>
+            <Piece color={p.color} />
+            &nbsp;
+            {`${p.name} Wins!`}
+          </Win>
+        )}
+        <Player disabled={currentRoundPlayer !== p}>
+          <Piece color={p.color} />
+          &nbsp;
+          {p.name}
+        </Player>
+      </React.Fragment>
     ))}
   </Layout>
 );

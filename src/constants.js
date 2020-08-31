@@ -3,7 +3,6 @@ export const CELL_SIZE = 30;
 export const GAME_STATUS = {
   PREPARE: 'PREPARE',
   PLAY: 'PLAY',
-  END: 'END',
 };
 
 export const BOARD_INITIAL_SIZE = {
