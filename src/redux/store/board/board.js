@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BOARD_INITIAL_SIZE, GAME_STATUS } from '../../constants';
-import deductionWins from '../../utils/deductionWins';
+import { BOARD_INITIAL_SIZE, GAME_STATUS } from '../../../constants';
+import deductionWins from '../../../utils/deductionWins';
 
 export const boardSlice = createSlice({
   name: 'board',

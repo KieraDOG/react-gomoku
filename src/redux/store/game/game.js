@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { assocPath } from 'ramda';
-import { GAME_STATUS, BOARD_INITIAL_SIZE, COLOR } from '../../constants';
+import { GAME_STATUS, BOARD_INITIAL_SIZE, COLOR } from '../../../constants';
 
 export const gameSlice = createSlice({
   name: 'game',

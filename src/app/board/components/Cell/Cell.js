@@ -1,12 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { pathOr } from 'ramda';
 import React from 'react';
 import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { CELL_SIZE } from '../../../../constants';
-import getCurrentRoundPlayer from '../../../../selectors/getCurrentRoundPlayer';
-import { place } from '../../../../store/pieces';
-import { win } from '../../../../store/players';
+import play from '../../../../redux/actions/play';
 
 const Cursor = styled.div`
   height: 8px;
@@ -106,40 +103,17 @@ const getDisabled = createSelector(
 );
 
 const mapStateToProps = createSelector(
-  ({ board }) => ({ board }),
-  getCurrentRoundPlayer,
   getDisabled,
-  ({ board }, currentRoundPlayer, disabled) => {
-    return {
-      board,
-      currentRoundPlayer,
-      disabled,
-    };
-  },
+  (disabled) => ({ disabled }),
 );
 
-const mapDispatchToProps = (dispatch) => ({
-  handlePlace: (color, x, y) => dispatch(place({ color, x, y })),
-  handleWin: (player, wins) => dispatch(win({ player, wins }))
-});
-
-const mergeProps = (state, dispatch, props) => ({
-  ...props,
-  disabled: state.disabled,
+const mapDispatchToProps = (dispatch, { x, y }) => ({
   onClick: (event) => {
-    const { currentRoundPlayer, board } = state;
-    const { x, y } = props;
-
     event.preventDefault();
-
-    const winMethods = pathOr({}, [x, y], board.wins);
-    const wins = Object.keys(winMethods);
-
-    dispatch.handlePlace(currentRoundPlayer.color, x, y);
-    dispatch.handleWin(currentRoundPlayer, wins);
+    dispatch(play({ x, y }));
   },
 });
 
-const ConnectedCell = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Cell);
+const ConnectedCell = connect(mapStateToProps, mapDispatchToProps)(Cell);
 
 export default ConnectedCell;

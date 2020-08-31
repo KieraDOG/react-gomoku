@@ -6,9 +6,9 @@ import FormControl from '../../components/FormControl';
 import Button from '../../components/Button';
 import Size from './components/Size';
 import Players from './components/Players';
-import { join } from '../../store/players/players';
-import { setSize } from '../../store/board/board';
-import { run } from '../../store/game';
+import { join } from '../../redux/store/players/players';
+import { setSize } from '../../redux/store/board/board';
+import { run } from '../../redux/store/game';
 
 const NoScroll = createGlobalStyle`
   body {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { handleConfigurationChange } from '../../../../store/game';
+import { handleConfigurationChange } from '../../../../redux/store/game';
 import TextInput from '../../../../components/TextInput';
 import Button from '../../../../components/Button';
 import FormControl from '../../../../components/FormControl';

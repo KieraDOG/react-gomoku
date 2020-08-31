@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextInput from '../../../../components/TextInput';
 import FormControl from '../../../../components/FormControl';
-import { handleConfigurationChange } from '../../../../store/game';
+import { handleConfigurationChange } from '../../../../redux/store/game';
 
 const Size = ({
   xs,

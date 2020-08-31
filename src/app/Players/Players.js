@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import styled, { css } from 'styled-components';
 import Piece from '../../components/Piece';
-import getCurrentRoundPlayer from '../../selectors/getCurrentRoundPlayer';
+import getCurrentRoundPlayer from '../../redux/selectors/getCurrentRoundPlayer';
 
 const Layout = styled.div`
   display: flex;
